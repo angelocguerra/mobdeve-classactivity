@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
     // TODO: Declare the attributes needed
@@ -25,50 +27,53 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+            Insets syst
 
         // TODO: Associate each view with the corresponding ID via findViewById()
         inputText = findViewById(R.id.inputText);
         btnSubmit = findViewById(R.id.btnSubmit);
         outputText = findViewById(R.id.outputText);
-    }
-
+    }emBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+});
 
     // TODO: Declare the functionalities at this point
     public void findPalindromeSum(View v) {
+        Arrays.sort(digits)
+
         int number = Integer.parseInt(inputText.getText().toString());
 
-        int digit1 = number / 100;
-        int digit2 = (number/10) % 10;
-        int digit3 = number % 10;
+        int[] digits = new int[3];
+        digits[0] = input / 100; // Hundreds
+        digits[1] = (input / 10) % 10; // Tens
+        digits[2] = input % 10; // Ones
 
-        int[] palindromes = new int[6];
-        palindromes[0] = createPalindrome(digit1, digit2, digit3);
-        palindromes[1] = createPalindrome(digit1, digit3, digit2);
-        palindromes[2] = createPalindrome(digit2, digit1, digit3);
-        palindromes[3] = createPalindrome(digit2, digit3, digit1);
-        palindromes[4] = createPalindrome(digit3, digit1, digit2);
-        palindromes[5] = createPalindrome(digit3, digit2, digit1);
+        // Find the smallest and largest palindromes
+        int[] palindromes = findPalindromes(digits);
+        int smallestPalindrome = palindromes[0];
+        int largestPalindrome = palindromes[1];
 
-        int smallest = palindromes[0];
-        int largest = palindromes[0];
-        for (int palindrome : palindromes) {
-            if(palindrome < smallest) {
-                smallest = palindrome;
-            }
-            if (palindrome > largest) {
-                largest = palindrome;
-            }
-        }
+        int sum = smallestPalindrome + largestPalindrome;
 
         // return smallest + largest;
-        outputText.setText(smallest + largest);
+        outputText.setText(sum);
     }
 
-    public static int createPalindrome(int a, int b, int c) {
-        return a*10001 + b*1010 + c*100;
+    public int[] findPalindromes(int[] digits) {
+        int[] result = new int[2];
+        Arrays.sort(digits);
+
+        // Forming the smallest palindrome: digits sorted in ascending order
+        int smallestPalindrome = digits[0] * 10000 + digits[1] * 1000 + digits[2] * 100 + digits[1] * 10 + digits[0];
+
+        // Forming the largest palindrome: digits sorted in descending order
+        int largestPalindrome = digits[2] * 10000 + digits[1] * 1000 + digits[0] * 100 + digits[1] * 10 + digits[2];
+
+        // Assign the smallest and largest palindromes
+        result[0] = smallestPalindrome;
+        result[1] = largestPalindrome;
+
+        return result;
     }
 }
