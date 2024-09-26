@@ -54,23 +54,39 @@
             android:textAlignment="textEnd"
             android:textColor="@color/white"
             android:textSize="16sp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/favorite_button"
-            android:padding="10dp">
-
-            <ToggleButton
-                android:id="@+id/toggle_star"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:background="@drawable/toggle_favorite"
-                android:drawableTint="#E4DEDE"
-                android:textOff=""
-                android:textOn="" />
-        </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/tbToggleButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvOnTour"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:background="@drawable/favorite_button"
+        android:drawableTint="#E4DEDE"
+
+        android:text=""
+        android:textOff=""
+        android:textOn="" />
+
+    <androidx.appcompat.widget.AppCompatToggleButton
+        android:id="@+id/tbToggleStar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="-10dp"
+        android:text=""
+        android:textOff=""
+        android:textOn=""
+
+        android:background="@drawable/toggle_favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvOnTour"
+    />
+
 
     <TextView
         android:id="@+id/tvOnTour"
